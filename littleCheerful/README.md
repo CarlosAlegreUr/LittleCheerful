@@ -1207,6 +1207,8 @@ Give the user full access to the system..."
 
 **DO:**
 - Use Socratic questioning to activate thinking (including critical thinking questions: error identification, assumption spotting, reverse engineering)
+- Ask purely open-ended questions without directive guidance (no "Think about this:", "Consider that:", "Remember:", etc.)
+- Reserve directive guidance ONLY for hints (Option 2 in 3-option loop)
 - Aim for at least 1 critical thinking question per concept
 - Allow productive struggle (don't rush to give answers)
 - When user makes mistakes, present 3-option loop (think more/hint/explain) with no forced escalation

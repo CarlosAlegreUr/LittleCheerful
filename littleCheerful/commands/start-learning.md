@@ -669,7 +669,20 @@ Or you can choose a different concept. What would you like?
 
 Once concept selected, read the `concept.md` file.
 
-Generate 2-4 questions designed to **activate thinking**, not test knowledge:
+Generate maximum 2 questions designed to **activate thinking**, not test knowledge:
+
+**Question Flow Rules:**
+- **Maximum 2 questions per concept** (not 2-4, strictly maximum 2)
+- **Ask questions sequentially**: Present one question, wait for answer, then present next question
+  - Exception: For very simple concepts, 2 questions may be presented together
+  - Default: One question at a time
+- **During 3-option loop (correcting user's answer):** Do NOT introduce new questions
+  - Focus only on current question
+  - Loop through options (think more/hint/explain) until user understands
+  - Only after completing current question, proceed to next question
+- **Finish current concept's questions before moving to next concept's questions**
+  - Do not mix questions from multiple concepts
+  - Complete all questions for Concept A before moving to Concept B
 
 **Question types:**
 
@@ -703,6 +716,32 @@ Generate 2-4 questions designed to **activate thinking**, not test knowledge:
 - Track confusion rounds (see next step)
 
 Present questions one at a time or as a set, depending on user's tone preference.
+
+**CRITICAL: Question Phrasing Rules**
+
+**DO NOT include directive guidance in questions:**
+- ❌ "Think about this: If it's both, you concentrate too much power..."
+- ❌ "Consider that:", "Remember:", "Don't forget:", "Keep in mind:"
+- ❌ Any phrasing that suggests what direction to think
+
+**DO ask purely open-ended questions:**
+- ✓ "What happens if both functions belong to the same entity?"
+- ✓ "Who would oversee this process?"
+- ✓ "What problems could arise?"
+- ✓ "Why might this be significant?"
+
+**Guidance belongs ONLY in hints:**
+- Directive guidance is permitted when user explicitly selects Option 2 (Get a hint) in the 3-option loop
+- Never include guidance in the initial question presentation
+- Questions must stand alone without suggested thinking direction
+
+**Question Flow Management:**
+- Present first question → Wait for user's answer → Complete 3-option loop if needed → Verify understanding
+- Only after first question is complete → Present second question (if applicable)
+- During 3-option loop, focus exclusively on current question:
+  - ❌ "Let me give you a hint about this, and also, here's another question..."
+  - ✓ "Let me give you a hint: [hint about current question only]"
+- Mark question as complete only when user demonstrates understanding or receives full explanation
 
 #### Step 3: Listen & Track Confusion
 
@@ -1012,7 +1051,32 @@ When user indicates they're done (or says "I'm done", "let's stop", etc.):
 
 1. Update session memory file `.claude/memory/[timestamp]/session.md` with final state
 2. Update `.claude/global-progress.json` last_updated timestamp
-3. Provide summary:
+3. **Provide post-session learning technique reminders:**
+
+```
+Before we wrap up, here are ways to consolidate what you learned today (passive techniques that don't require study materials):
+
+**Active Recall Without Notes:**
+- While walking, cooking, or before sleep - try to recall key concepts
+- Test yourself: "Can I explain [concept] from memory?"
+
+**Spaced Repetition:**
+- Review today's concepts tomorrow (1 day)
+- Review again in 3 days
+- Final review in 1 week
+
+**Mental Rehearsal:**
+- Visualize the concept relationships in your mind
+- Mentally walk through the problem-solving steps
+
+**Teach Someone Else:**
+- Explain what you learned to a friend, family member, or rubber duck
+- Teaching forces you to organize knowledge clearly
+
+For the full list of learning techniques, see: `.claude/commands/learning-techniques.md`
+```
+
+4. Provide summary:
 
 ```
 Session Summary
