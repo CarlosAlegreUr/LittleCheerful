@@ -142,6 +142,9 @@ ROOT GOAL (e.g., "Solve x = log(x)^e")
 ├── commands/
 │   ├── start-learning.md             # Single entry point - orchestrates entire flow
 │   └── learning-techniques.md        # Display evidence-based learning techniques
+├── agents/
+│   ├── tree-builder.md               # Specialized agent for tree generation (context optimization)
+│   └── concept-breakdown.md          # Specialized agent for concept breakdown (context optimization)
 ├── templates/
 │   ├── template-concept.md           # Concept node template
 │   ├── template-routine.md           # Physical practice routine template

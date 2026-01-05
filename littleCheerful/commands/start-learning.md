@@ -505,99 +505,65 @@ Once approved, say:
 ```
 Creating your learning tree...
 
-This will take a moment as I:
-- Fetch sources for each concept
-- Structure relationships
-- Set up progress tracking
-
-[Generating...]
+I'm delegating this to a specialized builder agent to preserve our conversation context.
+This will take a moment (30-60 seconds for typical trees).
 ```
 
-**For each concept in approved tree:**
+**Invoke Tree Builder Agent using Task tool:**
 
-1. **Create directory:** `.claude/study-goals/[goal-name]/[concept-name]/`
-
-2. **Create `concept.md`** using template from `.claude/templates/template-concept.md`
-
-3. **Fill in template sections:**
-   - **Overview**: 1-3 sentence summary
-   - **Prerequisites**: Link to parent/sibling concepts (e.g., `log-definition: ../log-definition/concept.md`)
-   - **Related Concepts**: Link to related but not prerequisite concepts
-   - **Explanation**: Use Feynman technique, adapted to user's learning profile (terminology level, example preferences)
-   - **Depth Level**: Use user's default from profile
-   - **Sources of Truth**: **Fetch at least 1 source** using WebFetch tool
-     - Determine source type based on user's depth level
-     - Level 1: Wikipedia, Khan Academy, YouTube with sources
-     - Level 2: MIT OCW, textbooks, Stanford Encyclopedia
-     - Level 3: Academic papers, journals
-     - Level 4: Primary sources, original works
-     - Cite with: Link, Type, Fetched timestamp
-     - If source discusses funding/bias, note it
-     - Minimum 1, recommended 2, maximum 4 sources
-   - **Assumptions & Warnings**:
-     - ASSUMPTION: Flag any logical assumptions made without explicit proof
-     - SIMPLIFIED: Flag any simplifications of complex reality
-     - CONTESTED: Flag any claims where experts/schools disagree (for subjective topics)
-     - UNVERIFIED: Flag any claims AI couldn't verify within scope
-   - **Sub-Concepts**: Leave empty initially (will be added if concept needs breakdown)
-   - **Practice Routine**: Only for physical skills - link to routine.md
-
-4. **If physical skill concept needs routine:**
-   - Create `routine.md` using template from `.claude/templates/template-routine.md`
-   - Fill in with specific exercises/practice steps
-
-5. **Create `.claude/study-goals/[goal-name]/tree.json`:**
-
+Prepare input JSON:
 ```json
 {
-  "goal": "[goal-name in kebab-case]",
-  "created": "[ISO 8601 timestamp]",
-  "last_updated": "[ISO 8601 timestamp]",
-  "max_concepts": 50,
-  "total_concepts": [N],
-  "tree": {
+  "goal_name": "[goal-name in kebab-case]",
+  "goal_description": "[user's goal statement]",
+  "approved_tree_structure": {
     "[concept-name]": {
-      "status": "NOT_STARTED",
-      "tags": [],
-      "last_reviewed": null,
-      "parent": "[parent-concept-name]",
-      "children": ["child-concept-1", "child-concept-2"]
-    },
-    "[another-concept]": {
-      "status": "STUDIED",
-      "tags": ["intuitive"],
-      "last_reviewed": "[timestamp]",
-      "parent": null,
-      "children": []
-    }
-  }
-}
-```
-
-**Mark concepts as STUDIED if user demonstrated understanding in assessment.**
-
-6. **Mark one concept as IN_PROGRESS** (entry point determined from tree structure).
-
-7. **Create initial session file:** `.claude/memory/[ISO-timestamp]/session.md` using template.
-
-8. **Update `.claude/global-progress.json`:**
-
-```json
-{
-  "goals": {
-    "[goal-name]": {
-      "created": "[timestamp]",
-      "last_accessed": "[timestamp]",
-      "total_concepts": [N],
-      "studied": [M],
-      "in_progress": 1,
-      "not_started": [N-M-1]
+      "parent": "[parent-name or null]",
+      "children": ["child-1", "child-2"]
     }
   },
-  "created": "[timestamp]",
-  "last_updated": "[timestamp]"
+  "concepts_marked_studied": ["concept-1", "concept-2"],
+  "user_profile": {
+    "source_depth": [from learning-profile.md],
+    "terminology_level": "[from learning-profile.md]",
+    "example_preferences": "[from learning-profile.md]",
+    "preferred_language": "[from learning-profile.md]"
+  },
+  "entry_point_concept": "[concept-name]",
+  "base_directory": "[absolute-path]/.claude/study-goals/[goal-name]"
 }
 ```
+
+Invoke agent:
+```
+Task: Build learning tree
+Agent: .claude/agents/tree-builder.md
+Input: [JSON above]
+```
+
+**Wait for agent response.**
+
+**Parse agent output JSON:**
+- If `status == "success"`: Proceed to validation
+- If `status == "error"`: Inform user of error, offer retry or manual approach
+
+**If unverified_concepts array is not empty:**
+```
+Note: {N} concepts could not be verified with external sources at depth level {M}:
+- {concept-1}
+- {concept-2}
+
+These concepts are included but marked UNVERIFIED. If you have reliable sources for these, please provide them and I can update.
+
+Would you like to:
+1. Proceed with these concepts marked UNVERIFIED
+2. Provide sources now
+3. Remove these concepts from the tree
+
+Your choice?
+```
+
+Wait for user decision. Handle accordingly.
 
 **After generation complete:**
 
@@ -998,12 +964,63 @@ What would you prefer?
    ```
 
 2. **If approved:**
-   - Create new concept directories and concept.md files for each sub-concept
-   - Fetch sources for each sub-concept using WebFetch
-   - Update parent concept.md with sub-concept links in Sub-Concepts section
-   - Update tree.json structure (add new concepts, update parent's children)
-   - Mark one sub-concept as IN_PROGRESS
-   - Update global-progress.json with new concept count
+
+   Say:
+   ```
+   Breaking down [concept]...
+
+   I'm delegating this to a specialized agent to preserve our conversation context.
+   This will take a moment (20-40 seconds for typical breakdowns).
+   ```
+
+   **Invoke Concept Breakdown Agent using Task tool:**
+
+   Prepare input JSON:
+   ```json
+   {
+     "goal_name": "[goal-name]",
+     "parent_concept_name": "[concept-name]",
+     "parent_concept_path": "[absolute-path]/.claude/study-goals/[goal-name]/[concept-name]",
+     "approved_sub_concepts": [
+       {"name": "[sub-concept-1]", "description": "[Brief description]"},
+       {"name": "[sub-concept-2]", "description": "[Brief description]"}
+     ],
+     "user_profile": {
+       "source_depth": [from learning-profile.md],
+       "terminology_level": "[from learning-profile.md]",
+       "example_preferences": "[from learning-profile.md]",
+       "preferred_language": "[from learning-profile.md]"
+     },
+     "tree_json_path": "[absolute-path]/.claude/study-goals/[goal-name]/tree.json"
+   }
+   ```
+
+   Invoke agent:
+   ```
+   Task: Break down concept into sub-concepts
+   Agent: .claude/agents/concept-breakdown.md
+   Input: [JSON above]
+   ```
+
+   **Wait for agent response.**
+
+   **Parse agent output JSON:**
+   - If `status == "success"`: Proceed to confirmation
+   - If `status == "error"`: Inform user of error, offer retry
+
+   **If unverified_concepts array is not empty:**
+   ```
+   Note: {N} sub-concepts could not be verified with external sources:
+   - {sub-concept-1}
+
+   These are included but marked UNVERIFIED. You can provide sources later if needed.
+   ```
+
+   **Mark first sub-concept as IN_PROGRESS:**
+   - Read tree.json
+   - Update first sub-concept: `"status": "IN_PROGRESS"`
+   - Update parent concept: `"status": "STUDIED"` (if was IN_PROGRESS)
+   - Write back to tree.json
 
 3. Confirm:
    ```
