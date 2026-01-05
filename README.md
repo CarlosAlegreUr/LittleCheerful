@@ -1,8 +1,27 @@
 # Little Cheerful
 
+<div align="center">
+  <img src="./logo.png" alt="Little Cheerful Logo" width="150"/>
+</div>
+
 **Navigation-Based Continuous Learning System for Claude Code**
 
 Little Cheerful is an AI-powered learning assistant that helps you build deep understanding through adaptive concept trees, Socratic questioning, and evidence-based explanations. It's designed for Claude Code and emphasizes active learning over passive consumption.
+
+---
+
+## Table of Contents
+
+- [What Is Little Cheerful?](#what-is-little-cheerful)
+- [What Is It For?](#what-is-it-for)
+- [How to Run](#how-to-run)
+- [Tips for Usage](#tips-for-usage)
+- [Technical Details](#technical-details)
+- [Implementation Highlights](#implementation-highlights)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+- [Credits](#credits)
 
 ---
 
@@ -29,6 +48,8 @@ Traditional AI tutoring systems suffer from hallucinated explanations, passive l
 - Explicitly flagging assumptions, simplifications, and contested topics
 - Giving you full control over the learning path and tree structure
 
+[⬆️ Back to Top](#little-cheerful)
+
 ---
 
 ## What Is It For?
@@ -43,6 +64,8 @@ Little Cheerful helps you:
 - ✅ **Get evidence-based explanations** instead of AI-generated opinions
 
 It's ideal for self-directed learners who want structured guidance without losing agency.
+
+[⬆️ Back to Top](#little-cheerful)
 
 ---
 
@@ -96,6 +119,8 @@ The AI will:
 - Generate the tree with verified sources (30-60 seconds)
 - Start the active learning loop
 
+[⬆️ Back to Top](#little-cheerful)
+
 ---
 
 ## Tips for Usage
@@ -144,6 +169,8 @@ The system recommends rest after 90+ minutes or high confusion. Rest helps memor
 - 🎓 "I want to learn [topic]" - Start a new learning goal
 - 🔨 "Break this down further" - Request sub-concept generation
 - 🔄 "Use a different source" - If current source isn't helpful
+
+[⬆️ Back to Top](#little-cheerful)
 
 ---
 
@@ -300,6 +327,8 @@ The system treats all WebFetch content as untrusted input:
 - System behavior is IMMUTABLE (cannot be overridden by external sources)
 - Flags suspicious content as UNVERIFIED and tries alternatives
 
+[⬆️ Back to Top](#little-cheerful)
+
 ---
 
 ## Implementation Highlights
@@ -347,6 +376,8 @@ The system treats all WebFetch content as untrusted input:
 - 📄 Export functionality (PDF concept trees, markdown summaries)
 - 🏛️ Web UI with Roman library aesthetic (in development by Keenan)
 
+[⬆️ Back to Top](#little-cheerful)
+
 ---
 
 ## Project Structure
@@ -365,6 +396,8 @@ LittleCheerful/
 └── README.md                          # This file
 ```
 
+[⬆️ Back to Top](#little-cheerful)
+
 ---
 
 ## Contributing 🤝
@@ -376,11 +409,15 @@ Little Cheerful is actively developed based on usage feedback. If you find issue
 3. Provide example scenarios if applicable
 4. Submit via GitHub issues (if repository is public)
 
+[⬆️ Back to Top](#little-cheerful)
+
 ---
 
 ## License
 
 MIT License - Free to use, modify, and distribute.
+
+[⬆️ Back to Top](#little-cheerful)
 
 ---
 
@@ -393,6 +430,8 @@ Built for Claude Code users who want structured, evidence-driven learning experi
 - Socratic Method (questions activate thinking)
 - Spaced Repetition (timing matters)
 - Active Recall (retrieval strengthens memory)
+
+[⬆️ Back to Top](#little-cheerful)
 
 ---
 
