@@ -1,7 +1,7 @@
-# Little Cheerful
+# Little Cheerful 🧠
 
 <div align="center">
-  <img src="./logo.png" alt="Little Cheerful Logo" width="150"/>
+  <img src="./logo.png" alt="Little Cheerful Logo" width="350"/>
 </div>
 
 **Navigation-Based Continuous Learning System for Claude Code**
