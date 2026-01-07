@@ -355,3 +355,148 @@ Reference files (read for integration patterns):
 4. npm run build completes without type errors
 ```
 
+
+=== AGENT COMPLETED: SUCCESS ===
+**Completed:** 2026-01-07 07:25:45
+**Phase:** API Layer complete
+**Build:** Pristine (0 errors, 0 warnings)
+**Files created:** 13 (4 lib modules, 9 API routes)
+
+**Output Summary:**
+- TypeScript types: Full domain coverage
+- Claude CLI: AsyncGenerator streaming, timeout support
+- File I/O: Windows paths, absolute from CLAUDE_BASE_PATH
+- Job queue: In-memory Map store
+- 9 API endpoints: profile, learning, tree, chat, jobs, materials
+- Security: Path traversal prevention
+- Error handling: Proper HTTP status codes
+
+No deviations from plan. All success criteria met (6/6).
+
+---
+
+
+=== AGENT STARTED ===
+**Agent #:** 04
+**Type:** tdd-builder
+**Phase:** 3 (Core Components)
+**Started:** 2026-01-07 07:26:42
+**Log file:** E:\Dev\LittleCheerful\littleCheerful\app-take2\logs\agent-lc7web01-04-tdd-builder.md
+
+**Prompt:**
+```
+MODE: TDD_LITE (components with visual testing deferred to Phase 4)
+
+#### Logging
+
+**Session ID:** lc7web01
+**Agent #:** 04
+**Started:** 2026-01-07 07:26:42
+**Log file:** E:\Dev\LittleCheerful\littleCheerful\app-take2\logs\agent-lc7web01-04-tdd-builder.md
+
+Create this log file immediately with header. Append work as you go.
+
+#### Context
+
+Building React components for chat interface, concept tree, onboarding wizard, and materials upload. Must follow ux-design.md specifications.
+
+Full plan: E:\Dev\LittleCheerful\littleCheerful\app-take2\logs\handoff-lc7web01.md
+
+#### Current State (VERIFIED)
+
+Depends on Phase 1 and ux-design.md completion. Components don't exist yet.
+
+Reference file: E:\Dev\LittleCheerful\littleCheerful\app-take2\ux-design.md
+
+#### Tasks
+
+1. Install and configure shadcn/ui:
+   - npx shadcn-ui@latest init
+   - Add: button, input, card, dialog, dropdown-menu, scroll-area
+2. Create Roman-themed wrappers:
+   - components/roman/ParchmentCard.tsx
+   - components/roman/ScrollContainer.tsx
+   - components/roman/OrnateHeading.tsx
+   - components/roman/CandleFlame.tsx (animated)
+   - components/roman/QuillLoader.tsx (animated)
+3. Create chat components:
+   - components/chat/ChatInterface.tsx (container)
+   - components/chat/MessageBubble.tsx (user/assistant)
+   - components/chat/ChatInput.tsx (message input)
+   - components/chat/ThreeOptionPrompt.tsx (mistake loop)
+   - components/chat/StreamingIndicator.tsx (typing)
+   - components/chat/MarkdownRenderer.tsx (MD + KaTeX)
+4. Create tree components:
+   - components/tree/ConceptTree.tsx (container)
+   - components/tree/TreeNode.tsx (concept node)
+   - components/tree/ProgressBadge.tsx (status)
+   - components/tree/TagChip.tsx (intuitive/formal/can-apply)
+5. Create onboarding components:
+   - components/onboarding/WizardContainer.tsx
+   - components/onboarding/WizardStep.tsx
+   - components/onboarding/PreferenceSelector.tsx
+   - components/onboarding/EasterEgg.tsx ("SURPRISE KEENAN!")
+6. Create upload components:
+   - components/materials/UploadZone.tsx (drag-drop)
+   - components/materials/MaterialList.tsx
+   - components/materials/MaterialCard.tsx
+7. Create hooks:
+   - hooks/useChat.ts (SSE + message state)
+   - hooks/useTree.ts (tree data)
+   - hooks/useProfile.ts (profile state)
+   - hooks/useJob.ts (polling)
+
+#### Constraints (DO NOT)
+
+- Do NOT deviate from ux-design.md color palette and typography
+- Do NOT use stock shadcn/ui styling; apply Roman theme overrides
+- Do NOT implement API integration yet; use mock data
+- Do NOT skip accessibility (ARIA labels, keyboard nav)
+
+#### Success Criteria
+
+- [ ] All 6 Roman components created with theme styling
+- [ ] All 6 chat components render correctly
+- [ ] All 4 tree components display concept structure
+- [ ] All 4 onboarding components work as wizard flow
+- [ ] All 3 materials components handle file display
+- [ ] All 4 hooks export correct interfaces
+- [ ] Components follow ux-design.md specifications
+
+#### Verification Steps
+
+1. npm run build completes without errors
+2. Storybook (if added) shows all components
+3. Visual inspection matches ux-design.md
+4. Keyboard navigation works on all interactive elements
+```
+
+
+=== AGENT BLOCKED: Task-Agent Mismatch ===
+**Blocked at:** 2026-01-07 07:35:15
+**Issue:** tdd-builder correctly identified that prompt contained implementation checklist without test requirements first
+**Agent feedback:** 25+ components in one session violates complexity limits, TDD_LITE requires tests before implementation
+
+**Resolution:** Split Phase 3 into multiple focused sessions with proper test requirements.
+
+### Revised Phase 3 Approach
+
+**Phase 3a:** Roman theme components (6 components - SIMPLE)
+**Phase 3b:** Chat components (6 components - MEDIUM)  
+**Phase 3c:** Tree components (4 components - SIMPLE)
+**Phase 3d:** Onboarding components (4 components - MEDIUM)
+**Phase 3e:** Materials components (3 components - SIMPLE)
+**Phase 3f:** Custom hooks (4 hooks - SIMPLE)
+
+Starting with Phase 3a (Roman components).
+
+---
+
+
+=== AGENT STARTED ===
+**Agent #:** 04a
+**Type:** tdd-builder
+**Phase:** 3a (Roman Theme Components)
+**Started:** 2026-01-07 07:28:12
+**Log file:** E:\Dev\LittleCheerful\littleCheerful\app-take2\logs\agent-lc7web01-04a-tdd-builder.md
+
