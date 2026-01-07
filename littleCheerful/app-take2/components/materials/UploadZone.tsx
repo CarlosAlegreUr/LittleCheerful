@@ -65,6 +65,7 @@ export function UploadZone({ onFileSelect, accept, isUploading }: UploadZoneProp
   return (
     <div
       data-upload-zone
+      data-testid="upload-zone"
       role="button"
       tabIndex={0}
       onClick={handleClick}
