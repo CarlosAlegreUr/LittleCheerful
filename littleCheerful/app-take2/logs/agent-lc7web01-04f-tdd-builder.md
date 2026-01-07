@@ -67,3 +67,37 @@ Committed: 9d3d893
 - TypeScript types: YES (all hooks properly typed)
 - Cleanup implemented: YES (AbortController, intervals)
 - Error handling: YES (all API calls wrapped in try/catch)
+
+## Hard Decisions Made
+
+None. All implementation details followed standard React hooks patterns and the API interfaces from lib/types.ts.
+
+## Issues Encountered
+
+1. **TextEncoder not defined in Jest**: Node.js doesn't provide TextEncoder/TextDecoder globally in Jest environment. Solution: Added polyfills to jest.setup.js using util module.
+
+2. **Act warnings in tests**: Some state updates happened outside act() blocks, causing console warnings. These are informational only and don't indicate actual test failures. The warnings occur because async operations in hooks trigger state updates that React wants wrapped in act().
+
+3. **Fake timers and polling tests**: Initial polling test failed because state updates weren't awaited after advancing timers. Solution: Added explicit waitFor() checks for job state updates after timer advances.
+
+## Recommendations
+
+1. Consider adding debouncing to useTree and useProfile to prevent excessive API calls if parent components re-render frequently.
+
+2. useChat could be extended to support conversation history persistence (localStorage or API).
+
+3. useJob polling interval (2s) is hardcoded. Could be made configurable if different jobs need different polling frequencies.
+
+## Completion Metrics
+
+**End:** 2026-01-07 08:49:00
+**Duration:** ~10 minutes
+**Files Modified:** 9 files
+- Created: 4 hook files (useChat.ts, useTree.ts, useProfile.ts, useJob.ts)
+- Created: 4 test files (*.test.ts)
+- Modified: jest.setup.js (added TextEncoder/TextDecoder polyfills)
+**Tests Added:** 32 tests (all passing)
+**Commits:** 3
+- ea4affb: RED phase (tests)
+- 9d3d893: GREEN phase (implementations)
+- 7f4d991: Documentation updates
