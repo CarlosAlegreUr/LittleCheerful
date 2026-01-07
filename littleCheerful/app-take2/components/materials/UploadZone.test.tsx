@@ -80,12 +80,23 @@ describe('UploadZone', () => {
     const dropZone = container.querySelector('[data-upload-zone]');
     const file = new File(['test content'], 'test.pdf', { type: 'application/pdf' });
 
+    // Create mock FileList
+    const fileList = {
+      0: file,
+      length: 1,
+      item: (index: number) => (index === 0 ? file : null),
+    } as unknown as FileList;
+
     fireEvent.drop(dropZone!, {
-      dataTransfer: { files: [file] },
+      dataTransfer: { files: fileList },
     });
 
     await waitFor(() => {
-      expect(mockOnFileSelect).toHaveBeenCalledWith(expect.any(FileList));
+      expect(mockOnFileSelect).toHaveBeenCalledTimes(1);
+      expect(mockOnFileSelect).toHaveBeenCalledWith(expect.objectContaining({
+        0: expect.any(File),
+        length: 1,
+      }));
     });
   });
 

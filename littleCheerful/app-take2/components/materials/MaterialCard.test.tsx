@@ -75,8 +75,8 @@ describe('MaterialCard', () => {
       />
     );
 
-    // 1024000 bytes = 1000 KB = ~1.0 MB
-    expect(screen.getByText(/1\.0\s*MB/i)).toBeInTheDocument();
+    // 1024000 bytes = 1000 KB (< 1 MB)
+    expect(screen.getByText(/1000\.0\s*KB/i)).toBeInTheDocument();
   });
 
   it('shows Book icon for PDF files', () => {

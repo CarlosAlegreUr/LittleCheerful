@@ -11,6 +11,7 @@ export interface QuillLoaderProps {
 export function QuillLoader({ text, className }: QuillLoaderProps) {
   return (
     <div
+      data-testid="quill-loader"
       role="status"
       aria-live="polite"
       className={cn('flex flex-col items-center justify-center gap-2', className)}
