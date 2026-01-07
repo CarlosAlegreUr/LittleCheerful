@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
-export interface ParchmentCardProps {
+export interface ParchmentCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   variant?: 'default' | 'elevated';
@@ -12,6 +12,7 @@ export function ParchmentCard({
   children,
   className,
   variant = 'default',
+  ...props
 }: ParchmentCardProps) {
   return (
     <Card
@@ -28,6 +29,7 @@ export function ParchmentCard({
         // Custom className
         className
       )}
+      {...props}
     >
       {children}
     </Card>
