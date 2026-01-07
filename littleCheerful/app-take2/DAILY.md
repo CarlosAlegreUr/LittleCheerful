@@ -1,3 +1,16 @@
+# 2026-01-07 09:04:15 - Page Integrations (Phase 4)
+
+✅ Complete
+**Focus**: Connected UI components to API endpoints, implementing full user flows for all 4 core journeys
+**Outcome**: All 5 pages wired up with full integration, 371 test assertions, build pristine (0 warnings, 0 errors)
+**Details**: Completed Phase 4 integration connecting all UI to API. Landing page (app/page.tsx): HEAD /api/profile/exists check on mount, shows EasterEgg component if no profile, redirects to /learn if profile exists, theme toggle button with useTheme hook, proper client component with useEffect for async checks. Onboarding wizard (app/(onboarding)/setup/page.tsx): WizardContainer with 6-step Roman numeral flow, PreferenceSelector mapped to LearningProfile types, POST /api/profile on completion with error handling, QuillLoader during save operation, redirect to /learn on success. Goal list page (app/learn/page.tsx): GET /api/learning/goals on mount, display grid of goals with progress bars (Gold gradient fill), "New Goal" modal with input validation, POST /api/learning/start on creation, navigation to /learn/[goalName] after success, separate loading states for initial fetch vs goal creation. Chat + Tree page (app/learn/[goalName]/page.tsx): ChatInterface wired to useChat hook (SSE streaming), ConceptTree wired to useTree hook (fetch on mount), selectedPath state for tree navigation, tree node click sends context message to chat, "Generate Tree" button with job polling via useJob hook, QuillLoader shows during tree generation with progress percentage, multiple loading states (tree loading/generation polling/error boundary), proper use() API for async params in Next.js 15. Materials page (app/materials/page.tsx): UploadZone component with drag-drop FileList handling, MaterialList displays uploaded files in responsive grid, POST /api/materials with FormData (multipart), DELETE /api/materials with JSON body, material selection placeholder handler, loading and error states with QuillLoader. Integration tests written first (TDD RED phase): 371 test assertions across 5 page test files verifying page renders, component wiring, API calls triggered, loading states display, error states display, navigation works. All pages use 'use client' directive, proper hook integration (useChat/useTree/useProfile/useJob/useTheme/useRouter), loading states with QuillLoader or skeletons, error state display with Roman Crimson colors, accessibility (ARIA labels, keyboard navigation, semantic HTML). Added data-testid="upload-zone" to UploadZone component for test support. Build verification: npm run build passes with 0 warnings, 0 errors, 13 routes (5 pages + 8 API dynamic routes). All user flows complete: onboarding → goal creation → active learning → materials upload.
+
+**Mode:** TDD_LITE
+**Agent:** tdd-builder
+**Session:** lc7web01-05
+
+---
+
 # 2026-01-07 08:48:11 - Custom React Hooks for API Integration
 
 ✅ Complete

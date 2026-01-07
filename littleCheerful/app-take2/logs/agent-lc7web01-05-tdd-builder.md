@@ -58,4 +58,56 @@ Committed RED phase: 32ddc20
 
 ### Step 2: GREEN Phase - Implementing Page Integrations
 
-Implementing pages to pass integration tests...
+Implemented all 5 pages with full integration:
+
+**1. Landing page (app/page.tsx):**
+- Profile check with HEAD /api/profile/exists
+- EasterEgg component for first-time users
+- Redirect logic based on profile state
+- Theme toggle button (useTheme hook)
+
+**2. Onboarding wizard (app/(onboarding)/setup/page.tsx):**
+- WizardContainer integration (6-step flow)
+- PreferenceSelector wired to state
+- Profile mapping (Preferences → LearningProfile)
+- POST /api/profile on completion
+- Redirect to /learn on success
+- QuillLoader for loading state
+- Error handling and display
+
+**3. Goal list page (app/learn/page.tsx):**
+- Fetch goals on mount (GET /api/learning/goals)
+- Display goals grid with progress bars
+- "New Goal" modal with input
+- POST /api/learning/start on creation
+- Navigation to /learn/[goalName] after success
+- Loading and error states
+
+**4. Chat + Tree page (app/learn/[goalName]/page.tsx):**
+- ChatInterface component (useChat hook)
+- ConceptTree component (useTree hook)
+- Tree generation button
+- Job polling with useJob hook
+- selectedPath state for tree navigation
+- Context messages on tree node click
+- Multiple loading states (tree loading, generation polling)
+- Error boundary
+
+**5. Materials page (app/materials/page.tsx):**
+- UploadZone component integration
+- MaterialList component integration
+- File upload with FormData
+- POST /api/materials (multipart)
+- DELETE /api/materials with ID
+- Material selection handler (placeholder)
+- Loading and error states
+
+**Component updates:**
+- Added data-testid="upload-zone" to UploadZone
+
+Build verified: 0 warnings, 0 errors
+Committed GREEN phase: 1e33fe3
+
+### Step 3: Verification
+
+Testing integration tests pass rate...
