@@ -121,6 +121,15 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		keyframes: {
+  			draw: {
+  				'0%': { strokeDashoffset: '1000' },
+  				'100%': { strokeDashoffset: '0' }
+  			}
+  		},
+  		animation: {
+  			draw: 'draw 1.2s ease-in infinite'
   		}
   	}
   },

@@ -60,3 +60,59 @@ Result: 5 failed suites (cannot find modules - expected)
 
 **Status:** ✅ RED phase complete - All tests failing as expected
 
+### Step 3: GREEN Phase - Implementation (2026-01-07 07:33:00)
+
+**Components implemented:**
+
+1. **ParchmentCard.tsx**
+   - Extends shadcn Card component
+   - Applies parchment background colors (light/dark mode)
+   - Border styling from ux-design.md (border-medium, rounded-xl)
+   - Variants: default (shadow-md), elevated (shadow-lg)
+   - Props: children, className, variant
+
+2. **ScrollContainer.tsx**
+   - Wraps shadcn ScrollArea component
+   - Custom height prop with inline styles
+   - Data attribute for test targeting
+   - Roman theme integration ready
+
+3. **OrnateHeading.tsx**
+   - Dynamic heading level (h1-h6)
+   - EB Garamond font (font-display)
+   - Gold underline decoration (border-b border-gold-light/dark)
+   - Responsive text sizes based on level
+   - Ink color for text
+
+4. **CandleFlame.tsx**
+   - Framer Motion animated component
+   - Opacity pulse animation (3s duration, infinite)
+   - Size variants: sm (4x4), md (6x6), lg (8x8)
+   - Gold color scheme
+   - Lucide Flame icon with animate-pulse
+
+5. **QuillLoader.tsx**
+   - Loading indicator with SVG quill
+   - Optional text prop
+   - Accessibility: role="status", aria-live="polite"
+   - Ink color stroke
+   - Custom draw animation (1.2s ease-in infinite)
+
+**Additional changes:**
+- Added `draw` keyframe animation to tailwind.config.ts
+- Fixed TypeScript error in OrnateHeading (JSX.IntrinsicElements → union type)
+
+**Test results:**
+```
+npm test
+Result: 5 passed suites, 37 passed tests, 0 failed
+```
+
+**Build verification:**
+```
+npm run build
+Result: ✓ Compiled successfully, 0 warnings, 0 errors
+```
+
+**Status:** ✅ GREEN phase complete - All tests passing, build pristine
+
