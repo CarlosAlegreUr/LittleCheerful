@@ -1,3 +1,16 @@
+# 2026-01-07 09:19:27 - Layout Components (Header, Sidebar, ErrorBoundary)
+
+✅ Complete
+**Focus**: Added missing navigation layout components to complete UI infrastructure
+**Outcome**: All layout components implemented with 23 passing tests, integrated into root layout, build pristine
+**Details**: Implemented layout infrastructure identified during plan compliance check. Header component: OrnateHeading "Little Cheerful" title, theme toggle button (Moon/Sun icons with useTheme hook), optional menu button for sidebar toggle (mobile only), sticky top-0 positioning with z-50, parchment background and border-bottom. Sidebar component: Navigation links (Dashboard → /learn, Materials → /materials) with active state highlighting (gold background), current goals list from useQuery('/api/learning/goals'), ParchmentCard styling for goal items, collapsible on mobile with isOpen/onClose props, fixed positioning with translate animations. ErrorBoundary component: React.Component-based error boundary (getDerivedStateFromError + componentDidCatch), InkBlot visual effect on error state, "Something went wrong" message with OrnateHeading, refresh button with gold styling. LayoutWrapper component: Conditional layout application (no layout on / and /setup pages, full layout on /learn and /materials), pathname-based routing with usePathname, sidebar state management, wraps all pages with ErrorBoundary. Root layout integration: Updated app/layout.tsx to wrap children with LayoutWrapper, maintains ThemeProvider and QueryProvider hierarchy. Test infrastructure: Added global mocks to jest.setup.js (next/navigation, next-themes, LayoutWrapper pass-through), updated Header.test.tsx to avoid ThemeProvider rendering issues, LayoutWrapper.test.tsx unmocks for proper testing. All 23 layout tests passing (Header, Sidebar, ErrorBoundary, LayoutWrapper), build pristine (0 warnings, 0 errors), 4 commits (RED, GREEN for components, GREEN for layout integration, GREEN for test fixes).
+
+**Mode:** AUTO
+**Agent:** tdd-builder
+**Session:** b7f8k2m9-01
+
+---
+
 # 2026-01-07 09:04:15 - Page Integrations (Phase 4)
 
 ✅ Complete
