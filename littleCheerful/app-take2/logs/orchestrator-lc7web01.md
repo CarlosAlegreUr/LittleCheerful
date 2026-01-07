@@ -666,3 +666,19 @@ Total: 26 components + hooks, all tested
 **Started:** 2026-01-07 08:51:02
 **Log file:** E:\Dev\LittleCheerful\littleCheerful\app-take2\logs\agent-lc7web01-05-tdd-builder.md
 
+
+=== AGENT DEVIATION DETECTED ===
+**Status:** DEVIATION_DETECTED
+**Issue:** Layout components (Sidebar, Header, global Error boundary) not implemented
+**Core functionality:** Complete (all pages wire to API correctly)
+**Missing:** Navigation chrome
+
+### Recovery: Fix Forward (TDD-Preserving)
+
+Re-invoking agent to add missing layout components:
+- Sidebar navigation component
+- Header component with theme toggle
+- Global Error boundary wrapper
+
+---
+

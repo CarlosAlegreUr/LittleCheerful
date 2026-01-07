@@ -1,6 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Header } from './Header';
-import { ThemeProvider } from '@/providers/ThemeProvider';
 
 // Mock useTheme
 jest.mock('next-themes', () => ({
@@ -12,11 +11,7 @@ jest.mock('next-themes', () => ({
 
 describe('Header', () => {
   const renderHeader = (showSidebar = false) => {
-    return render(
-      <ThemeProvider attribute="class" defaultTheme="system">
-        <Header showSidebar={showSidebar} />
-      </ThemeProvider>
-    );
+    return render(<Header showSidebar={showSidebar} />);
   };
 
   it('renders without crashing', () => {
