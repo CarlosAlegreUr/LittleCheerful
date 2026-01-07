@@ -1,4 +1,8 @@
 import { render, screen } from '@testing-library/react';
+
+// Unmock LayoutWrapper for this test file
+jest.unmock('@/components/layout/LayoutWrapper');
+
 import { LayoutWrapper } from './LayoutWrapper';
 
 // Mock usePathname
