@@ -14,6 +14,24 @@ const statusStyles = {
 };
 
 export function ProgressBadge({ status, percentage }: ProgressBadgeProps) {
+  const [prevPercentage, setPrevPercentage] = React.useState(percentage);
+  const [shouldAnimate, setShouldAnimate] = React.useState(false);
+
+  // Trigger scale pulse animation when percentage changes
+  React.useEffect(() => {
+    if (percentage !== prevPercentage) {
+      setShouldAnimate(true);
+      setPrevPercentage(percentage);
+
+      // Reset animation flag after animation completes
+      const timer = setTimeout(() => {
+        setShouldAnimate(false);
+      }, 400);
+
+      return () => clearTimeout(timer);
+    }
+  }, [percentage, prevPercentage]);
+
   return (
     <div
       role="img"
@@ -23,7 +41,8 @@ export function ProgressBadge({ status, percentage }: ProgressBadgeProps) {
         'w-12 h-12',
         'rounded-full',
         'text-sm font-semibold',
-        statusStyles[status]
+        statusStyles[status],
+        shouldAnimate && 'animate-scale-pulse'
       )}
     >
       {percentage}%

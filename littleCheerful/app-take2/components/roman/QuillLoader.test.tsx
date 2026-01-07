@@ -47,8 +47,8 @@ describe('QuillLoader', () => {
 
   it('has animation class for stroke animation', () => {
     const { container } = render(<QuillLoader />);
-    const svg = container.querySelector('svg');
+    const path = container.querySelector('path');
     // Should have animation class for quill writing effect
-    expect(svg?.getAttribute('class')).toContain('animate-');
+    expect(path).toHaveClass('animate-quill-write');
   });
 });

@@ -41,7 +41,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     <nav
       className={cn(
         'fixed md:static inset-y-0 left-0 z-40',
-        'w-64 bg-parchment-light dark:bg-parchment-dark',
+        'w-64 bg-marble-light dark:bg-marble-dark',
+        'texture-marble', // Marble veining texture
         'border-r border-border-medium',
         'flex flex-col',
         'transition-transform duration-300',

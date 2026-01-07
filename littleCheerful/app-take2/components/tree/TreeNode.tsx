@@ -56,12 +56,14 @@ export function TreeNode({
       className={cn(
         // Base ParchmentCard styling
         'bg-parchment-light dark:bg-parchment-dark',
+        'texture-parchment', // Paper grain texture
         'border-l-4',
         statusBorderStyles[concept.status],
         'rounded-xl',
         'p-4',
         'cursor-pointer',
         'transition-colors duration-200',
+        'node-glow', // Gold shadow on hover from globals.css
         // Hover state
         'hover:bg-gold-light/5 dark:hover:bg-gold-dark/10',
         // Selected state

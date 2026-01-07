@@ -21,6 +21,7 @@ export function ParchmentCard({
         'bg-parchment-light dark:bg-parchment-dark',
         'border border-border-medium',
         'rounded-xl', // 12px border radius for organic feel
+        'texture-parchment', // Paper grain texture overlay
 
         // Variant-specific shadow
         variant === 'default' && 'shadow-md',

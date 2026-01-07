@@ -1,8 +1,19 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import GoalPage from './page';
+import { use } from 'react';
+import { ReadableStream } from 'stream/web';
+
+// Polyfill ReadableStream for Node test environment
+global.ReadableStream = ReadableStream as any;
 
 // Mock fetch
 global.fetch = jest.fn();
+
+// Mock React's use() hook
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  use: jest.fn(),
+}));
 
 // Mock useParams
 jest.mock('next/navigation', () => ({
@@ -14,6 +25,8 @@ jest.mock('next/navigation', () => ({
 describe('GoalPage (Chat + Tree) Integration', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    // Mock use() to return resolved params
+    (use as jest.Mock).mockReturnValue({ goalName: 'test-goal' });
   });
 
   it('should render chat interface and tree sidebar', async () => {
@@ -28,7 +41,7 @@ describe('GoalPage (Chat + Tree) Integration', () => {
       });
 
     const props = { params: Promise.resolve({ goalName: 'test-goal' }) };
-    render(await GoalPage(props));
+    render(<GoalPage {...props} />);
 
     expect(screen.getByRole('region', { name: /chat interface/i })).toBeInTheDocument();
     expect(screen.getByRole('tree')).toBeInTheDocument();
@@ -53,7 +66,7 @@ describe('GoalPage (Chat + Tree) Integration', () => {
     });
 
     const props = { params: Promise.resolve({ goalName: 'test-goal' }) };
-    render(await GoalPage(props));
+    render(<GoalPage {...props} />);
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith('/api/tree/test-goal');
@@ -77,7 +90,7 @@ describe('GoalPage (Chat + Tree) Integration', () => {
       });
 
     const props = { params: Promise.resolve({ goalName: 'test-goal' }) };
-    render(await GoalPage(props));
+    render(<GoalPage {...props} />);
 
     const input = screen.getByPlaceholderText(/type your message/i);
     fireEvent.change(input, { target: { value: 'What is JavaScript?' } });
@@ -116,7 +129,7 @@ describe('GoalPage (Chat + Tree) Integration', () => {
       });
 
     const props = { params: Promise.resolve({ goalName: 'test-goal' }) };
-    render(await GoalPage(props));
+    render(<GoalPage {...props} />);
 
     const input = screen.getByPlaceholderText(/type your message/i);
     fireEvent.change(input, { target: { value: 'Hi' } });
@@ -149,7 +162,7 @@ describe('GoalPage (Chat + Tree) Integration', () => {
       });
 
     const props = { params: Promise.resolve({ goalName: 'test-goal' }) };
-    render(await GoalPage(props));
+    render(<GoalPage {...props} />);
 
     await waitFor(() => {
       const treeNode = screen.getByText(/variables/i);
@@ -180,7 +193,7 @@ describe('GoalPage (Chat + Tree) Integration', () => {
       });
 
     const props = { params: Promise.resolve({ goalName: 'test-goal' }) };
-    render(await GoalPage(props));
+    render(<GoalPage {...props} />);
 
     // Trigger tree generation
     const generateButton = screen.getByRole('button', { name: /generate tree/i });
@@ -229,7 +242,7 @@ describe('GoalPage (Chat + Tree) Integration', () => {
       });
 
     const props = { params: Promise.resolve({ goalName: 'test-goal' }) };
-    render(await GoalPage(props));
+    render(<GoalPage {...props} />);
 
     const generateButton = screen.getByRole('button', { name: /generate tree/i });
     fireEvent.click(generateButton);
@@ -250,7 +263,7 @@ describe('GoalPage (Chat + Tree) Integration', () => {
     );
 
     const props = { params: Promise.resolve({ goalName: 'test-goal' }) };
-    render(await GoalPage(props));
+    render(<GoalPage {...props} />);
 
     await waitFor(() => {
       expect(screen.getByText(/error/i)).toBeInTheDocument();

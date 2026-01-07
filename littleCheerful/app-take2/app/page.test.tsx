@@ -4,14 +4,30 @@ import HomePage from './page';
 // Mock fetch
 global.fetch = jest.fn();
 
+// Mock next/navigation
+const mockPush = jest.fn();
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
+}));
+
 describe('HomePage Integration', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should render without crashing', () => {
+  it('should render without crashing', async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      status: 404,
+    });
+
     render(<HomePage />);
-    expect(screen.getByText(/Little Cheerful/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByText(/Little Cheerful/i)).toBeInTheDocument();
+    });
   });
 
   it('should check if profile exists on mount', async () => {
@@ -43,13 +59,6 @@ describe('HomePage Integration', () => {
   });
 
   it('should redirect to /learn when profile exists', async () => {
-    const mockPush = jest.fn();
-    jest.mock('next/navigation', () => ({
-      useRouter: () => ({
-        push: mockPush,
-      }),
-    }));
-
     (global.fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
       status: 200,
@@ -62,8 +71,16 @@ describe('HomePage Integration', () => {
     });
   });
 
-  it('should have theme toggle button', () => {
+  it('should have theme toggle button', async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      status: 404,
+    });
+
     render(<HomePage />);
-    expect(screen.getByRole('button', { name: /theme/i })).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /theme/i })).toBeInTheDocument();
+    });
   });
 });

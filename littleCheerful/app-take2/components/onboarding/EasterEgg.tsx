@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { OrnateHeading } from '@/components/roman/OrnateHeading';
+import { GoldenFlourish } from '@/components/roman/GoldenFlourish';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -51,18 +52,25 @@ export function EasterEgg({ show, onContinue }: EasterEggProps) {
         className={cn(
           'text-center',
           'animate-in zoom-in duration-1000',
-          'motion-reduce:animate-none'
+          'motion-reduce:animate-none',
+          'flex flex-col items-center gap-6'
         )}
       >
+        {/* Top flourish */}
+        <GoldenFlourish className="motion-reduce:opacity-100" animate={true} />
+
         {/* Dramatic heading */}
         <div id="easter-egg-title">
           <OrnateHeading
             level={1}
-            className="mb-8 text-6xl text-gold-light dark:text-gold-dark"
+            className="mb-2 text-6xl text-gold-light dark:text-gold-dark"
           >
             SURPRISE KEENAN!
           </OrnateHeading>
         </div>
+
+        {/* Bottom flourish */}
+        <GoldenFlourish className="motion-reduce:opacity-100 rotate-180" animate={true} />
 
         {/* Continue button */}
         <Button
@@ -70,7 +78,7 @@ export function EasterEgg({ show, onContinue }: EasterEggProps) {
           onClick={onContinue}
           onKeyDown={handleKeyDown}
           size="lg"
-          className="bg-crimson-light hover:bg-crimson-dark dark:bg-crimson-dark dark:hover:bg-crimson-light text-parchment-light dark:text-parchment-dark"
+          className="mt-4 bg-crimson-light hover:bg-crimson-dark dark:bg-crimson-dark dark:hover:bg-crimson-light text-parchment-light dark:text-parchment-dark"
         >
           Continue
         </Button>

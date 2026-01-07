@@ -18,8 +18,7 @@ export function QuillLoader({ text, className }: QuillLoaderProps) {
     >
       <svg
         className={cn(
-          'stroke-ink-light dark:stroke-ink-dark',
-          'animate-pulse'
+          'stroke-ink-light dark:stroke-ink-dark'
         )}
         width="48"
         height="48"
@@ -27,13 +26,13 @@ export function QuillLoader({ text, className }: QuillLoaderProps) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Quill feather */}
+        {/* Quill feather with stroke animation */}
         <path
           d="M8 40 L24 24 L32 8 M24 24 L40 16"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="animate-[draw_1.2s_ease-in_infinite]"
+          className="animate-quill-write"
         />
         {/* Quill tip */}
         <path

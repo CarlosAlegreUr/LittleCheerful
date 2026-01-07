@@ -3,6 +3,7 @@ import { crimsonText, ebGaramond, jetbrainsMono } from './fonts';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { QueryProvider } from '@/providers/QueryProvider';
 import { LayoutWrapper } from '@/components/layout/LayoutWrapper';
+import { ErrorBoundary } from '@/components/layout/ErrorBoundary';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -29,7 +30,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
-            <LayoutWrapper>{children}</LayoutWrapper>
+            <ErrorBoundary>
+              <LayoutWrapper>{children}</LayoutWrapper>
+            </ErrorBoundary>
           </QueryProvider>
         </ThemeProvider>
       </body>

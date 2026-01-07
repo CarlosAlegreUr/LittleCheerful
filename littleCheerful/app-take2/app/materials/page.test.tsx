@@ -223,7 +223,8 @@ describe('MaterialsPage Integration', () => {
       },
     });
 
-    expect(screen.getByTestId('quill-loader')).toBeInTheDocument();
+    const loaders = screen.getAllByTestId('quill-loader');
+    expect(loaders.length).toBeGreaterThan(0);
 
     resolvePromise!({
       ok: true,

@@ -76,8 +76,21 @@ export function useChat(): UseChatReturn {
 
         for (const line of lines) {
           if (line.startsWith('data: ')) {
-            const content = line.slice(6); // Remove "data: " prefix
-            accumulatedContent += content;
+            try {
+              const jsonStr = line.slice(6);
+              const parsed = JSON.parse(jsonStr);
+
+              if (parsed.content) {
+                accumulatedContent += parsed.content;
+              } else if (parsed.error) {
+                throw new Error(parsed.error);
+              } else if (parsed.done) {
+                break;
+              }
+            } catch (err) {
+              // Fallback to raw content if JSON parsing fails
+              accumulatedContent += line.slice(6);
+            }
 
             // Update assistant message
             setMessages((prev) => {

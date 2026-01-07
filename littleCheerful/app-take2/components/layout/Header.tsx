@@ -19,7 +19,8 @@ export function Header({ showSidebar = false, onToggleSidebar }: HeaderProps) {
     <header
       className={cn(
         'sticky top-0 z-50',
-        'bg-parchment-light dark:bg-parchment-dark',
+        'bg-marble-light dark:bg-marble-dark',
+        'texture-marble', // Marble veining texture
         'border-b border-border-medium',
         'px-4 py-3',
         'flex items-center justify-between'

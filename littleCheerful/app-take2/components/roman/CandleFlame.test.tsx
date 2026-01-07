@@ -33,9 +33,9 @@ describe('CandleFlame', () => {
 
   it('has animation class by default', () => {
     const { container } = render(<CandleFlame />);
-    // Animation is on the SVG icon inside the motion.div
-    const svg = container.querySelector('svg');
-    expect(svg).toHaveClass('animate-pulse');
+    // Animation is on the wrapper div
+    const flame = container.firstChild as HTMLElement;
+    expect(flame).toHaveClass('animate-candle-flicker');
   });
 
   it('uses Framer Motion for animation', () => {

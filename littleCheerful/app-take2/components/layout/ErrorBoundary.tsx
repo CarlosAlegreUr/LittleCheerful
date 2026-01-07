@@ -33,9 +33,9 @@ export class ErrorBoundary extends React.Component<
       return (
         <div className="min-h-screen flex items-center justify-center p-8">
           <div className="max-w-2xl text-center relative">
-            {/* InkBlot effect */}
+            {/* InkBlot effect - expanding circle animation */}
             <div className="relative inline-block">
-              <div className="absolute inset-0 bg-ink-light dark:bg-ink-dark opacity-10 blur-xl rounded-full animate-pulse" />
+              <div className="absolute inset-0 bg-blood-light dark:bg-blood-dark opacity-30 blur-2xl rounded-full animate-ink-blot" />
               <h1 className="relative text-4xl font-display font-semibold mb-4 text-ink-light dark:text-ink-dark">
                 Something went wrong
               </h1>

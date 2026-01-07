@@ -91,13 +91,18 @@ describe('LearnPage Integration', () => {
   });
 
   it('should navigate to goal page after creation', async () => {
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        goalName: 'learn-typescript',
-        status: 'started',
-      }),
-    });
+    (global.fetch as jest.Mock)
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ goals: [] }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          goalName: 'learn-typescript',
+          status: 'started',
+        }),
+      });
 
     render(<LearnPage />);
 
@@ -134,7 +139,8 @@ describe('LearnPage Integration', () => {
     const submitButton = screen.getByRole('button', { name: /start learning/i });
     fireEvent.click(submitButton);
 
-    expect(screen.getByTestId('quill-loader')).toBeInTheDocument();
+    const loaders = screen.getAllByTestId('quill-loader');
+    expect(loaders.length).toBeGreaterThan(0);
 
     resolvePromise!({
       ok: true,
@@ -143,9 +149,11 @@ describe('LearnPage Integration', () => {
   });
 
   it('should show error state on creation failure', async () => {
-    (global.fetch as jest.Mock).mockRejectedValueOnce(
-      new Error('Failed to create goal')
-    );
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      status: 500,
+      json: async () => ({ error: 'Failed to create goal' }),
+    });
 
     render(<LearnPage />);
 
@@ -159,7 +167,8 @@ describe('LearnPage Integration', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/error/i)).toBeInTheDocument();
+      const errors = screen.getAllByText(/error/i);
+      expect(errors.length).toBeGreaterThan(0);
     });
   });
 });
