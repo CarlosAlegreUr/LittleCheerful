@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { crimsonText, ebGaramond, jetbrainsMono } from './fonts';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { QueryProvider } from '@/providers/QueryProvider';
+import { LayoutWrapper } from '@/components/layout/LayoutWrapper';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -27,7 +28,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <LayoutWrapper>{children}</LayoutWrapper>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
