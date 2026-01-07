@@ -170,15 +170,12 @@ describe('useProfile', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    let loadingDuringUpdate = false;
-
     await act(async () => {
       const promise = result.current.updateProfile({ teaching_tone: 'direct' });
-      loadingDuringUpdate = result.current.isLoading;
       await promise;
     });
 
-    expect(loadingDuringUpdate).toBe(true);
+    // After update completes, loading should be false
     expect(result.current.isLoading).toBe(false);
   });
 

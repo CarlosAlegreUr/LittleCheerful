@@ -83,6 +83,11 @@ describe('useJob', () => {
       expect(global.fetch).toHaveBeenCalledTimes(1);
     });
 
+    // Wait for job data to be set
+    await waitFor(() => {
+      expect(result.current.job).toEqual(mockJobRunning);
+    });
+
     expect(result.current.isPolling).toBe(true);
 
     // Wait 2 seconds for next poll
