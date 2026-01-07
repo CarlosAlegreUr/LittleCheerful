@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:LittleCheerful.Maui.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:LittleCheerful.Maui.Converters"
+             x:Class="LittleCheerful.Maui.Views.MaterialsPage"
+             x:DataType="viewmodels:MaterialsViewModel"
+             Title="{Binding Title}"
+             BackgroundColor="{StaticResource Parchment}">
+
+    <ContentPage.Resources>
+        <converters:IntToDoubleConverter x:Key="IntToDoubleConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="{StaticResource PageMargin}">
+
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0" Spacing="12" Margin="0,0,0,16">
+            <!-- Book Icon -->
+            <Frame BackgroundColor="{StaticResource MarbleWhite}"
+                   BorderColor="{StaticResource GoldAccent}"
+                   CornerRadius="40"
+                   WidthRequest="80"
+                   HeightRequest="80"
+                   HorizontalOptions="Center"
+                   Padding="0"
+                   HasShadow="True">
+                <Label Text="&#128218;"
+                       FontSize="40"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Frame>
+
+            <Label Text="Study Materials"
+                   Style="{StaticResource H1Text}"
+                   HorizontalOptions="Center" />
+
+            <Label Text="{Binding GoalName, StringFormat='For: {0}'}"
+                   IsVisible="{Binding GoalName, Converter={toolkit:IsNotNullConverter}}"
+                   Style="{StaticResource OracleText}"
+                   FontAttributes="Italic"
+                   HorizontalOptions="Center" />
+
+            <!-- Error Message -->
+            <Frame IsVisible="{Binding ErrorMessage, Converter={toolkit:IsNotNullConverter}}"
+                   BackgroundColor="{StaticResource ErrorInk}"
+                   BorderColor="{StaticResource Crimson}"
+                   Padding="12" CornerRadius="8">
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="{StaticResource MarbleWhite}"
+                       HorizontalOptions="Center" />
+            </Frame>
+        </VerticalStackLayout>
+
+        <!-- Materials List -->
+        <Frame Grid.Row="1"
+               Style="{StaticResource ScrollCard}"
+               Padding="8">
+            <CollectionView ItemsSource="{Binding Materials}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:StudyMaterialViewModel">
+                        <Frame Margin="4" Padding="16" CornerRadius="8"
+                               BackgroundColor="{StaticResource MarbleWhite}"
+                               BorderColor="{StaticResource MarbleGray}">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                                <!-- File Type Icon -->
+                                <Frame Grid.Column="0"
+                                       BackgroundColor="{StaticResource Crimson}"
+                                       BorderColor="{StaticResource GoldDark}"
+                                       Padding="12"
+                                       CornerRadius="8"
+                                       VerticalOptions="Center"
+                                       HasShadow="False">
+                                    <Label Text="{Binding FileExtension}"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource MarbleWhite}"
+                                           HorizontalOptions="Center" />
+                                </Frame>
+
+                                <!-- File Info -->
+                                <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                                    <Label Text="{Binding FileName}"
+                                           Style="{StaticResource BodyText}"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource InkBlack}" />
+                                    <Label Text="{Binding UploadedAt}"
+                                           Style="{StaticResource CaptionText}"
+                                           TextColor="{StaticResource InkBrown}" />
+                                    <HorizontalStackLayout Spacing="4"
+                                                           IsVisible="{Binding HasExtractedText}">
+                                        <BoxView Color="{StaticResource NodeStudied}"
+                                                 WidthRequest="8"
+                                                 HeightRequest="8"
+                                                 CornerRadius="4"
+                                                 VerticalOptions="Center" />
+                                        <Label Text="Text extracted"
+                                               Style="{StaticResource CaptionText}"
+                                               TextColor="{StaticResource NodeStudied}" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+
+                                <!-- Delete Button -->
+                                <Button Grid.Column="2"
+                                        Text="Remove"
+                                        Style="{StaticResource RomanButtonSecondary}"
+                                        TextColor="{StaticResource Crimson}"
+                                        BorderColor="{StaticResource Crimson}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MaterialsViewModel}}, Path=DeleteMaterialCommand}"
+                                        CommandParameter="{Binding .}"
+                                        VerticalOptions="Center"
+                                        HeightRequest="40"
+                                        Padding="12,0" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <Frame BackgroundColor="Transparent"
+                           BorderColor="Transparent"
+                           HasShadow="False"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center">
+                        <VerticalStackLayout Spacing="16" Padding="32">
+                            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                               IsVisible="{Binding IsLoading}"
+                                               Color="{StaticResource GoldAccent}" />
+
+                            <VerticalStackLayout IsVisible="{Binding IsLoading, Converter={toolkit:InvertedBoolConverter}}"
+                                                 Spacing="12">
+                                <Label Text="&#128220;"
+                                       FontSize="60"
+                                       HorizontalOptions="Center" />
+                                <Label Text="Your library is empty"
+                                       Style="{StaticResource H3Text}"
+                                       HorizontalOptions="Center" />
+                                <Label Text="Upload scrolls, tomes, or manuscripts to help the Oracle understand your learning materials."
+                                       Style="{StaticResource BodySmallText}"
+                                       TextColor="{StaticResource InkBrown}"
+                                       HorizontalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       MaximumWidthRequest="300" />
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Frame>
+
+        <!-- Upload Section -->
+        <VerticalStackLayout Grid.Row="2" Spacing="16" Margin="0,16,0,0">
+            <!-- Upload Progress -->
+            <Frame IsVisible="{Binding IsUploading}"
+                   Style="{StaticResource MarbleCard}"
+                   Padding="16">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Inscribing to the library..."
+                           Style="{StaticResource OracleText}"
+                           FontAttributes="Italic"
+                           HorizontalOptions="Center" />
+                    <ProgressBar Progress="{Binding UploadProgress, Converter={StaticResource IntToDoubleConverter}}"
+                                 ProgressColor="{StaticResource GoldAccent}" />
+                    <Label Text="{Binding UploadProgress, StringFormat='{0}%'}"
+                           Style="{StaticResource BodySmallText}"
+                           TextColor="{StaticResource GoldDark}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Action Buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
+                <Button Text="Add Materials"
+                        Style="{StaticResource RomanButton}"
+                        Command="{Binding UploadMaterialCommand}"
+                        IsEnabled="{Binding IsUploading, Converter={toolkit:InvertedBoolConverter}}"
+                        MinimumWidthRequest="180" />
+
+                <Button Text="Refresh"
+                        Style="{StaticResource RomanButtonSecondary}"
+                        Command="{Binding LoadMaterialsCommand}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

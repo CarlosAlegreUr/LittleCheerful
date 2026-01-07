@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- =============================================== -->
+    <!-- Roman Library Color Palette - Light Mode       -->
+    <!-- =============================================== -->
+
+    <!-- Primary Background Colors (Parchment) -->
+    <Color x:Key="Parchment">#F4ECD8</Color>
+    <Color x:Key="ParchmentDark">#E8DCC4</Color>
+    <Color x:Key="ParchmentLight">#FAF5EA</Color>
+
+    <!-- Accent Colors - Crimson -->
+    <Color x:Key="Crimson">#8B0000</Color>
+    <Color x:Key="CrimsonLight">#B22222</Color>
+    <Color x:Key="CrimsonDark">#6B0000</Color>
+
+    <!-- Surface Colors - Marble -->
+    <Color x:Key="MarbleWhite">#F8F8FF</Color>
+    <Color x:Key="MarbleGray">#E8E8F0</Color>
+
+    <!-- Highlight Colors - Gold -->
+    <Color x:Key="GoldAccent">#DAA520</Color>
+    <Color x:Key="GoldLight">#FFD700</Color>
+    <Color x:Key="GoldDark">#B8860B</Color>
+
+    <!-- Text Colors -->
+    <Color x:Key="InkBlack">#1A1A1A</Color>
+    <Color x:Key="InkBrown">#3D2B1F</Color>
+
+    <!-- Semantic Colors -->
+    <Color x:Key="SuccessGold">#DAA520</Color>
+    <Color x:Key="ErrorInk">#4A0000</Color>
+    <Color x:Key="WarningAmber">#D4A017</Color>
+
+    <!-- Tag Colors -->
+    <Color x:Key="TagIntuitive">#6B8E23</Color>
+    <Color x:Key="TagFormal">#4169E1</Color>
+    <Color x:Key="TagCanApply">#800080</Color>
+
+    <!-- Node Status Colors -->
+    <Color x:Key="NodeNotStarted">#C4B89E</Color>
+    <Color x:Key="NodeInProgress">#DAA520</Color>
+    <Color x:Key="NodeStudied">#228B22</Color>
+
+    <!-- =============================================== -->
+    <!-- Roman Library Color Palette - Dark Mode        -->
+    <!-- (Nighttime Library)                            -->
+    <!-- =============================================== -->
+
+    <!-- Primary Background Colors -->
+    <Color x:Key="NightSky">#0D1B2A</Color>
+    <Color x:Key="NightSkyLight">#1B263B</Color>
+    <Color x:Key="NightSkyDark">#051015</Color>
+
+    <!-- Moonlight Accent -->
+    <Color x:Key="Moonlight">#C4D4E0</Color>
+    <Color x:Key="MoonlightBright">#E8F0F8</Color>
+    <Color x:Key="MoonlightDim">#8BA4B8</Color>
+
+    <!-- Warm Candlelight -->
+    <Color x:Key="Candlelight">#FFB347</Color>
+    <Color x:Key="CandlelightGlow">#FFD699</Color>
+    <Color x:Key="CandlelightDim">#CC8A30</Color>
+
+    <!-- Surface Colors - Night Marble -->
+    <Color x:Key="NightMarble">#1E2A3A</Color>
+    <Color x:Key="NightMarbleLight">#2A3A4A</Color>
+
+    <!-- Text Colors - Night -->
+    <Color x:Key="MoonInk">#E8E8F0</Color>
+    <Color x:Key="MoonInkDim">#A8B8C8</Color>
+
+    <!-- Accent remains Crimson but lighter for contrast -->
+    <Color x:Key="CrimsonNight">#DC3545</Color>
+    <Color x:Key="CrimsonNightLight">#FF6B7A</Color>
+
+    <!-- Gold accents remain similar -->
+    <Color x:Key="GoldNight">#FFD700</Color>
+
+    <!-- =============================================== -->
+    <!-- Legacy/Utility Colors                          -->
+    <!-- =============================================== -->
+    <Color x:Key="Primary">#8B0000</Color>
+    <Color x:Key="Secondary">#DAA520</Color>
+    <Color x:Key="Tertiary">#3D2B1F</Color>
+
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>
+
+</ResourceDictionary>

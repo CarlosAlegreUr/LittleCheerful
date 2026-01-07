@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode colors (default) */
+  --color-parchment: #F4ECD8;
+  --color-crimson: #8B0000;
+  --color-marble: #F8F8FF;
+  --color-gold: #DAA520;
+  --color-ink: #2C1810;
+  --color-laurel: #2E6F2E;
+  --color-wax-seal: #B8710D;
+  --color-blood: #9B1C1C;
+  --color-lapis: #1E4D8B;
+  --color-border-light: #D4C4A8;
+  --color-border-medium: #B8A888;
+  --color-disabled: #968A76;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Background and foreground */
+  --background: var(--color-parchment);
+  --foreground: var(--color-ink);
+}
+
+.dark {
+  /* Dark mode colors */
+  --color-parchment: #1A1410;
+  --color-crimson: #6B2020;
+  --color-marble: #252030;
+  --color-gold: #B8860B;
+  --color-ink: #E8DFC8;
+  --color-laurel: #4A8F4A;
+  --color-wax-seal: #D4932F;
+  --color-blood: #C23B3B;
+  --color-lapis: #3B6FAF;
+  --color-border-light: #3A3025;
+  --color-border-medium: #524435;
+  --color-disabled: #5A5045;
+
+  /* Background and foreground */
+  --background: var(--color-parchment);
+  --foreground: var(--color-ink);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-crimson-text), Georgia, 'Times New Roman', serif;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-eb-garamond), Garamond, Georgia, serif;
+  }
+
+  code, pre {
+    font-family: var(--font-jetbrains-mono), 'Fira Code', Consolas, monospace;
+  }
+}

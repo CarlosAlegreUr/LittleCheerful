@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:LittleCheerful.Maui.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:LittleCheerful.Maui.Converters"
+             x:Class="LittleCheerful.Maui.Views.GoalCreationPage"
+             x:DataType="viewmodels:GoalCreationViewModel"
+             Title="{Binding Title}"
+             BackgroundColor="{StaticResource Parchment}">
+
+    <ContentPage.Resources>
+        <converters:IntToDoubleConverter x:Key="IntToDoubleConverter" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto" Padding="{StaticResource PageMargin}">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="24" VerticalOptions="Center">
+
+                <!-- Page Header with Scroll Icon -->
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Frame BackgroundColor="{StaticResource MarbleWhite}"
+                           BorderColor="{StaticResource GoldAccent}"
+                           CornerRadius="40"
+                           WidthRequest="80"
+                           HeightRequest="80"
+                           HorizontalOptions="Center"
+                           Padding="0"
+                           HasShadow="True">
+                        <Label Text="&#128220;"
+                               FontSize="40"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <Label Text="Inscribe Your Learning Goal"
+                           Style="{StaticResource H1Text}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+
+                    <Label Text="What knowledge do you seek, seeker?"
+                           Style="{StaticResource OracleText}"
+                           FontAttributes="Italic"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <!-- Error Message -->
+                <Frame IsVisible="{Binding ErrorMessage, Converter={toolkit:IsNotNullConverter}}"
+                       BackgroundColor="{StaticResource ErrorInk}"
+                       BorderColor="{StaticResource Crimson}"
+                       Padding="16" CornerRadius="8">
+                    <Label Text="{Binding ErrorMessage}"
+                           TextColor="{StaticResource MarbleWhite}"
+                           Style="{StaticResource BodyText}"
+                           HorizontalOptions="Center" />
+                </Frame>
+
+                <!-- Input Form (visible when not generating) -->
+                <Frame Style="{StaticResource ScrollCard}"
+                       IsVisible="{Binding IsGenerating, Converter={toolkit:InvertedBoolConverter}}">
+                    <VerticalStackLayout Spacing="20">
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Your Learning Goal"
+                                   Style="{StaticResource BodySmallText}"
+                                   TextColor="{StaticResource GoldDark}" />
+                            <Entry Placeholder="e.g., Quantum Physics, Machine Learning, Latin..."
+                                   Text="{Binding GoalName}"
+                                   FontSize="18" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Your Current Knowledge (Optional)"
+                                   Style="{StaticResource BodySmallText}"
+                                   TextColor="{StaticResource GoldDark}" />
+                            <Editor Placeholder="Share what you already know about this subject..."
+                                    Text="{Binding InitialAssessment}"
+                                    HeightRequest="120"
+                                    BackgroundColor="{StaticResource ParchmentLight}" />
+                        </VerticalStackLayout>
+
+                        <Button Text="Inscribe Goal"
+                                Style="{StaticResource RomanButton}"
+                                Command="{Binding CreateGoalCommand}"
+                                IsEnabled="{Binding IsLoading, Converter={toolkit:InvertedBoolConverter}}"
+                                HorizontalOptions="Center"
+                                MinimumWidthRequest="200" />
+
+                        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                           IsVisible="{Binding IsLoading}"
+                                           Color="{StaticResource GoldAccent}"
+                                           HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Progress Display (visible when generating) -->
+                <Frame Style="{StaticResource MarbleCard}"
+                       IsVisible="{Binding IsGenerating}">
+                    <VerticalStackLayout Spacing="20">
+
+                        <Label Text="The Oracle is inscribing your knowledge tree..."
+                               Style="{StaticResource OracleText}"
+                               FontAttributes="Italic"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" />
+
+                        <!-- Progress Bar -->
+                        <Grid RowDefinitions="Auto,Auto" RowSpacing="8">
+                            <ProgressBar Grid.Row="0"
+                                         Progress="{Binding GenerationProgress, Converter={StaticResource IntToDoubleConverter}}"
+                                         ProgressColor="{StaticResource GoldAccent}"
+                                         HeightRequest="8" />
+
+                            <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center" Spacing="8">
+                                <Label Text="{Binding GenerationProgress, StringFormat='{0}%'}"
+                                       Style="{StaticResource H2Text}"
+                                       TextColor="{StaticResource GoldDark}" />
+                            </HorizontalStackLayout>
+                        </Grid>
+
+                        <Label Text="{Binding GenerationStatus}"
+                               Style="{StaticResource BodySmallText}"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" />
+
+                        <!-- Animated quill indicator -->
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                            <Label Text="Writing" Style="{StaticResource CaptionText}" />
+                            <ActivityIndicator IsRunning="True"
+                                               Color="{StaticResource GoldAccent}"
+                                               WidthRequest="20"
+                                               HeightRequest="20" />
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Cancel Button -->
+        <Button Grid.Row="1"
+                Text="Cancel"
+                Style="{StaticResource RomanButtonSecondary}"
+                Command="{Binding CancelCommand}"
+                HorizontalOptions="Start"
+                Margin="0,16,0,0" />
+    </Grid>
+</ContentPage>

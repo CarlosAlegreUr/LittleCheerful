@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LittleCheerful.Maui.Views.SurpriseKeenanPage"
+             Title="Welcome"
+             BackgroundColor="{StaticResource ParchmentDark}">
+
+    <!-- Deep parchment background with centered content -->
+    <Grid>
+        <!-- Decorative corners (simulated candle glow) -->
+        <BoxView Color="{StaticResource GoldLight}"
+                 Opacity="0.15"
+                 WidthRequest="150"
+                 HeightRequest="150"
+                 CornerRadius="75"
+                 HorizontalOptions="Start"
+                 VerticalOptions="Start"
+                 Margin="-50,-50,0,0" />
+
+        <BoxView Color="{StaticResource GoldLight}"
+                 Opacity="0.15"
+                 WidthRequest="150"
+                 HeightRequest="150"
+                 CornerRadius="75"
+                 HorizontalOptions="End"
+                 VerticalOptions="Start"
+                 Margin="0,-50,-50,0" />
+
+        <!-- Main content -->
+        <VerticalStackLayout
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Spacing="30"
+            Padding="32">
+
+            <!-- Book icon placeholder (using text) -->
+            <Frame BackgroundColor="{StaticResource Crimson}"
+                   BorderColor="{StaticResource GoldAccent}"
+                   CornerRadius="12"
+                   WidthRequest="120"
+                   HeightRequest="120"
+                   HorizontalOptions="Center"
+                   Padding="0">
+                <Label Text="&#128214;"
+                       FontSize="60"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Frame>
+
+            <!-- Main Title - Gold Display -->
+            <Label
+                Text="SURPRISE KEENAN!"
+                Style="{StaticResource GoldDisplayText}"
+                FontSize="42"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
+
+            <!-- Subtitle -->
+            <Label
+                Text="Your personal learning oracle is ready!"
+                Style="{StaticResource H3Text}"
+                TextColor="{StaticResource InkBrown}"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
+
+            <!-- Description -->
+            <Label
+                Text="Enter the ancient library where wisdom awaits..."
+                Style="{StaticResource BodyText}"
+                TextColor="{StaticResource InkBrown}"
+                Opacity="0.8"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
+
+            <!-- Loading indicator styled as golden -->
+            <ActivityIndicator
+                IsRunning="True"
+                Color="{StaticResource GoldAccent}"
+                HorizontalOptions="Center"
+                WidthRequest="48"
+                HeightRequest="48" />
+
+            <Label
+                Text="Preparing your journey..."
+                Style="{StaticResource CaptionText}"
+                TextColor="{StaticResource InkBrown}"
+                Opacity="0.7"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+
+        <!-- Bottom decorative glow -->
+        <BoxView Color="{StaticResource GoldLight}"
+                 Opacity="0.1"
+                 WidthRequest="200"
+                 HeightRequest="200"
+                 CornerRadius="100"
+                 HorizontalOptions="Center"
+                 VerticalOptions="End"
+                 Margin="0,0,0,-100" />
+    </Grid>
+</ContentPage>

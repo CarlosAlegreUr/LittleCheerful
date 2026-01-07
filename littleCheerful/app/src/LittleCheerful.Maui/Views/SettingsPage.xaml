@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:LittleCheerful.Maui.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="LittleCheerful.Maui.Views.SettingsPage"
+             x:DataType="viewmodels:SettingsViewModel"
+             Title="{Binding Title}"
+             BackgroundColor="{StaticResource Parchment}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <ScrollView Padding="{StaticResource PageMargin}">
+        <VerticalStackLayout Spacing="20">
+
+            <!-- Header -->
+            <VerticalStackLayout Spacing="12" Margin="0,0,0,16">
+                <!-- Desk Icon -->
+                <Frame BackgroundColor="{StaticResource MarbleWhite}"
+                       BorderColor="{StaticResource GoldAccent}"
+                       CornerRadius="40"
+                       WidthRequest="80"
+                       HeightRequest="80"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       HasShadow="True">
+                    <Label Text="&#9881;"
+                           FontSize="40"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Label Text="Learning Preferences"
+                       Style="{StaticResource H1Text}"
+                       HorizontalOptions="Center" />
+
+                <Label Text="Configure how the Oracle guides your learning"
+                       Style="{StaticResource OracleText}"
+                       FontAttributes="Italic"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+
+            <!-- Loading -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="{StaticResource GoldAccent}"
+                               HorizontalOptions="Center" />
+
+            <!-- Messages -->
+            <Frame IsVisible="{Binding ErrorMessage, Converter={toolkit:IsNotNullConverter}}"
+                   BackgroundColor="{StaticResource ErrorInk}"
+                   BorderColor="{StaticResource Crimson}"
+                   Padding="12" CornerRadius="8">
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="{StaticResource MarbleWhite}"
+                       HorizontalOptions="Center" />
+            </Frame>
+
+            <Frame IsVisible="{Binding SuccessMessage, Converter={toolkit:IsNotNullConverter}}"
+                   BackgroundColor="{StaticResource NodeStudied}"
+                   BorderColor="{StaticResource GoldDark}"
+                   Padding="12" CornerRadius="8">
+                <Label Text="{Binding SuccessMessage}"
+                       TextColor="{StaticResource MarbleWhite}"
+                       HorizontalOptions="Center" />
+            </Frame>
+
+            <!-- Teaching Tone -->
+            <Frame Style="{StaticResource ScrollCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Teaching Tone"
+                           Style="{StaticResource H3Text}"
+                           TextColor="{StaticResource GoldDark}" />
+                    <Label Text="How should the Oracle speak with you?"
+                           Style="{StaticResource BodySmallText}" />
+                    <Picker ItemsSource="{Binding ToneOptions}"
+                            SelectedItem="{Binding SelectedTone}" />
+                    <Entry Placeholder="Describe your custom tone..."
+                           Text="{Binding CustomToneDescription}"
+                           IsVisible="False">
+                        <Entry.Triggers>
+                            <DataTrigger TargetType="Entry" Binding="{Binding SelectedTone}" Value="Other">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Entry.Triggers>
+                    </Entry>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Motivation Style -->
+            <Frame Style="{StaticResource ScrollCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Motivation Style"
+                           Style="{StaticResource H3Text}"
+                           TextColor="{StaticResource GoldDark}" />
+                    <Label Text="What keeps you engaged in learning?"
+                           Style="{StaticResource BodySmallText}" />
+                    <Picker ItemsSource="{Binding MotivationOptions}"
+                            SelectedItem="{Binding SelectedMotivation}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Source Depth -->
+            <Frame Style="{StaticResource ScrollCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Source Depth"
+                           Style="{StaticResource H3Text}"
+                           TextColor="{StaticResource GoldDark}" />
+                    <Label Text="How detailed should source citations be?"
+                           Style="{StaticResource BodySmallText}" />
+                    <Slider Minimum="1" Maximum="4" Value="{Binding SourceDepth}" />
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Label Text="Level:"
+                               Style="{StaticResource BodySmallText}" />
+                        <Label Text="{Binding SourceDepth, StringFormat='{0:F0}'}"
+                               Style="{StaticResource BodyText}"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource GoldDark}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Terminology Level -->
+            <Frame Style="{StaticResource ScrollCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Terminology Level"
+                           Style="{StaticResource H3Text}"
+                           TextColor="{StaticResource GoldDark}" />
+                    <Label Text="What level of technical language do you prefer?"
+                           Style="{StaticResource BodySmallText}" />
+                    <Picker ItemsSource="{Binding TerminologyOptions}"
+                            SelectedItem="{Binding SelectedTerminology}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Example Preference -->
+            <Frame Style="{StaticResource ScrollCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Example Preference"
+                           Style="{StaticResource H3Text}"
+                           TextColor="{StaticResource GoldDark}" />
+                    <Label Text="How should concepts be illustrated?"
+                           Style="{StaticResource BodySmallText}" />
+                    <Picker ItemsSource="{Binding ExampleOptions}"
+                            SelectedItem="{Binding SelectedExamples}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Preferred Language -->
+            <Frame Style="{StaticResource ScrollCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Preferred Language"
+                           Style="{StaticResource H3Text}"
+                           TextColor="{StaticResource GoldDark}" />
+                    <Label Text="In which language shall the Oracle speak?"
+                           Style="{StaticResource BodySmallText}" />
+                    <Picker ItemsSource="{Binding LanguageOptions}"
+                            SelectedItem="{Binding PreferredLanguage}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Profile Info -->
+            <Frame Style="{StaticResource MarbleCard}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Profile Information"
+                           Style="{StaticResource H3Text}"
+                           TextColor="{StaticResource InkBrown}" />
+                    <BoxView Style="{StaticResource Divider}" />
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Created:"
+                               Style="{StaticResource BodySmallText}" />
+                        <Label Text="{Binding ProfileCreated, StringFormat='{0:g}'}"
+                               Style="{StaticResource BodySmallText}"
+                               TextColor="{StaticResource InkBrown}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Last Updated:"
+                               Style="{StaticResource BodySmallText}" />
+                        <Label Text="{Binding ProfileUpdated, StringFormat='{0:g}'}"
+                               Style="{StaticResource BodySmallText}"
+                               TextColor="{StaticResource InkBrown}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Action Buttons -->
+            <VerticalStackLayout Spacing="16" Margin="0,16,0,0">
+                <HorizontalStackLayout Spacing="16" HorizontalOptions="Center">
+                    <Button Text="Save Changes"
+                            Style="{StaticResource RomanButton}"
+                            Command="{Binding SaveProfileCommand}"
+                            MinimumWidthRequest="150" />
+
+                    <Button Text="Reset to Defaults"
+                            Style="{StaticResource RomanButtonSecondary}"
+                            TextColor="{StaticResource Crimson}"
+                            BorderColor="{StaticResource Crimson}"
+                            Command="{Binding ResetProfileCommand}"
+                            MinimumWidthRequest="150" />
+                </HorizontalStackLayout>
+
+                <Button Text="Run Onboarding Again"
+                        Style="{StaticResource GoldButton}"
+                        Command="{Binding RunOnboardingCommand}"
+                        HorizontalOptions="Center"
+                        MinimumWidthRequest="220" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
