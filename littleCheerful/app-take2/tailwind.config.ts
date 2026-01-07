@@ -47,6 +47,28 @@ const config: Config = {
   				light: '#1E4D8B',
   				dark: '#3B6FAF'
   			},
+  			// Semantic aliases
+  			success: {
+  				light: '#2E6F2E',
+  				dark: '#4A8F4A'
+  			},
+  			warning: {
+  				light: '#B8710D',
+  				dark: '#D4932F'
+  			},
+  			danger: {
+  				light: '#9B1C1C',
+  				dark: '#C23B3B'
+  			},
+  			info: {
+  				light: '#1E4D8B',
+  				dark: '#3B6FAF'
+  			},
+  			disabled: '#968A76',
+  			'border-medium': {
+  				light: '#B8A888',
+  				dark: '#524435'
+  			},
   			border: 'hsl(var(--border))',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

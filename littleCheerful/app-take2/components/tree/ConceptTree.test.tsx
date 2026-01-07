@@ -122,7 +122,7 @@ describe('ConceptTree', () => {
       />
     );
     // Should be wrapped in a scrollable container
-    expect(container.querySelector('[class*="scroll"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-scroll-container]')).toBeInTheDocument();
   });
 
   it('handles empty tree data', () => {
@@ -156,7 +156,8 @@ describe('ConceptTree', () => {
       />
     );
 
-    const firstNode = screen.getByText('react-basics');
+    // Find the TreeNode element (which has the keyboard handler)
+    const firstNode = screen.getAllByRole('treeitem')[0];
     firstNode.focus();
     await user.keyboard('{Enter}');
     expect(onNodeClick).toHaveBeenCalledWith('react-basics');
