@@ -164,7 +164,7 @@ describe('WizardStep', () => {
   });
 
   it('does not have aria-current when inactive', () => {
-    render(
+    const { container } = render(
       <WizardStep
         stepNumber={2}
         title="Step Two"
@@ -175,8 +175,9 @@ describe('WizardStep', () => {
       </WizardStep>
     );
 
-    const stepContainer = screen.queryByText('Step Two')?.closest('[role]');
-    expect(stepContainer).not.toHaveAttribute('aria-current');
+    // When inactive, component returns null, so there should be no content
+    expect(screen.queryByText('Step Two')).not.toBeInTheDocument();
+    expect(container.querySelector('[aria-current]')).not.toBeInTheDocument();
   });
 
   it('has EB Garamond font for Roman numeral (display font)', () => {

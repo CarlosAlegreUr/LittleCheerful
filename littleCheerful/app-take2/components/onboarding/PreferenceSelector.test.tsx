@@ -34,12 +34,13 @@ describe('PreferenceSelector', () => {
       />
     );
 
-    expect(screen.getByText(/tone/i)).toBeInTheDocument();
-    expect(screen.getByText(/motivation/i)).toBeInTheDocument();
-    expect(screen.getByText(/depth/i)).toBeInTheDocument();
-    expect(screen.getByText(/pace/i)).toBeInTheDocument();
-    expect(screen.getByText(/format/i)).toBeInTheDocument();
-    expect(screen.getByText(/breaks/i)).toBeInTheDocument();
+    // Use exact text matching for category titles to avoid multiple matches
+    expect(screen.getByText('Tone')).toBeInTheDocument();
+    expect(screen.getByText('Motivation')).toBeInTheDocument();
+    expect(screen.getByText('Depth')).toBeInTheDocument();
+    expect(screen.getByText('Pace')).toBeInTheDocument();
+    expect(screen.getByText('Format')).toBeInTheDocument();
+    expect(screen.getByText('Breaks')).toBeInTheDocument();
   });
 
   it('displays tone options: socratic, encouraging, direct', () => {
@@ -82,9 +83,9 @@ describe('PreferenceSelector', () => {
       />
     );
 
-    expect(screen.getByLabelText(/surface/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/balanced/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/deep/i)).toBeInTheDocument();
+    expect(screen.getByLabelText('Surface')).toBeInTheDocument();
+    expect(screen.getByLabelText('Balanced')).toBeInTheDocument();
+    expect(screen.getByLabelText('Deep')).toBeInTheDocument();
   });
 
   it('displays pace options: slow, adaptive, fast', () => {
@@ -141,12 +142,12 @@ describe('PreferenceSelector', () => {
       />
     );
 
-    expect(screen.getByLabelText(/socratic/i)).toBeChecked();
-    expect(screen.getByLabelText(/mastery/i)).toBeChecked();
-    expect(screen.getByLabelText(/deep/i)).toBeChecked();
-    expect(screen.getByLabelText(/adaptive/i)).toBeChecked();
-    expect(screen.getByLabelText(/conversational/i)).toBeChecked();
-    expect(screen.getByLabelText(/frequent/i)).toBeChecked();
+    expect(screen.getByLabelText('Socratic')).toBeChecked();
+    expect(screen.getByLabelText('Mastery')).toBeChecked();
+    expect(screen.getByLabelText('Deep')).toBeChecked();
+    expect(screen.getByLabelText('Adaptive')).toBeChecked();
+    expect(screen.getByLabelText('Conversational')).toBeChecked();
+    expect(screen.getByLabelText('Frequent')).toBeChecked();
   });
 
   it('calls onChange when a preference is selected', () => {
